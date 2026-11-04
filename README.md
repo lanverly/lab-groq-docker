@@ -1,5 +1,8 @@
 # Laboratório Docker + GroqCloud (FastAPI) 04/11/2026
 
+> Disponível no: [GITHUB](https://github.com/lanverly/lab-groq-docker)
+> https://github.com/lanverly/lab-groq-docker
+
 ## Objetivos
 
 - Diferenciar imagem Docker de contêiner.
