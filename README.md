@@ -19,28 +19,32 @@
 
 ## Arquitetura do laboratório
 ```mermaid
-
 flowchart LR
-    A["🌐<br/><b>01 · CLIENTE</b><br/><br/>Navegador<br/>Swagger UI · curl"]
+    CLIENTE["🌐 CLIENTE<br/>Navegador · Swagger · curl"]
 
-    B["🐳<br/><b>02 · API REST</b><br/><br/>Docker + FastAPI<br/>Porta 8000"]
+    subgraph HOST["🖥️ HOSPEDAGEM · SERVIDOR LOCAL OU VM"]
+        direction TB
+        API["🐳 DOCKER + FASTAPI<br/>API REST · Porta 8000"]
+        KEY["🔐 SEGURANÇA<br/>GROQ_API_KEY<br/>Variável de ambiente"]
+        KEY -.->|"Credencial utilizada"| API
+    end
 
-    C["☁️<br/><b>03 · GROQCLOUD</b><br/><br/>GPT-OSS 20B<br/>Inferência de IA"]
+    GROQ["☁️ GROQCLOUD<br/>GPT-OSS 20B<br/>Inferência de IA"]
 
-    A -->|"HTTP / JSON"| B
-    B -->|"HTTPS / API Key"| C
+    CLIENTE -->|"HTTP · JSON"| API
+    API -->|"HTTPS · Autenticação"| GROQ
 
     classDef client fill:#E7F1FF,stroke:#3B82F6,stroke-width:2px,color:#1E3A8A
     classDef api fill:#E4F7ED,stroke:#16A34A,stroke-width:2px,color:#14532D
+    classDef security fill:#FFF4D6,stroke:#D97706,stroke-width:2px,color:#92400E
     classDef cloud fill:#F1EAFE,stroke:#8B5CF6,stroke-width:2px,color:#581C87
 
-    class A client
-    class B api
-    class C cloud
+    class CLIENTE client
+    class API api
+    class KEY security
+    class GROQ cloud
 
-    linkStyle default stroke:#64748B,stroke-width:2px
-
-
+    style HOST fill:#F8FAFC,stroke:#94A3B8,stroke-width:2px,stroke-dasharray:5 5,color:#334155
 ```
 
 ## Executando
